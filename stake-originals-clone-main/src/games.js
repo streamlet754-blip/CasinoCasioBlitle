@@ -1,0 +1,9 @@
+export const GAMES = [
+    { id: 'crash', name: 'Crash', navLabel: 'Crash', path: '/crash', icon: 'original', image: '/images/crash.avif', rtp: '97% RTP', volatility: 'High volatility' },
+    { id: 'plinko', name: 'Plinko', navLabel: 'Plinko', path: '/plinko', icon: 'plinko', image: '/images/plinko.avif', rtp: '96% RTP', volatility: 'Medium volatility' },
+    { id: 'mines', name: 'Mines', navLabel: 'Mines', path: '/mines', icon: 'mines', image: '/images/mines.avif', rtp: '96% RTP', volatility: 'Medium volatility' },
+]
+
+export function isGamePath(pathname) {
+    return GAMES.some((game) => pathname.startsWith(game.path))
+}

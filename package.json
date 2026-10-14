@@ -1,0 +1,19 @@
+{
+  "name": "pocket-arcade-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Play-money demo bridge and Casio fx-CG50 arcade app",
+  "main": "server.js",
+  "scripts": {
+    "build": "npm ci --include=dev --prefix stake-originals-clone-main && npm run build --prefix stake-originals-clone-main",
+    "dev:web": "npm run dev --prefix stake-originals-clone-main",
+    "start": "node server.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@upstash/redis": "^1.39.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0"
+  }
+}

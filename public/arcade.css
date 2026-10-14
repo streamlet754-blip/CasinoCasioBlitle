@@ -1,0 +1,144 @@
+.arcade {
+  margin-top: 24px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.arcade-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 0 16px;
+}
+.arcade-head h2 { margin: 5px 0 0; font-size: 24px; }
+.wallet-readout { display: flex; align-items: center; gap: 11px; }
+.wallet-readout span { color: var(--muted); font: 10px var(--mono); }
+.wallet-readout strong { min-width: 84px; color: var(--acid); font: 20px var(--mono); text-align: right; }
+.wallet-readout button {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: transparent;
+  font-size: 20px;
+}
+.wallet-readout button:hover { border-color: var(--acid); color: var(--acid); }
+.game-tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--line); }
+.game-tab {
+  min-width: 92px;
+  padding: 12px 16px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  background: transparent;
+  font-size: 13px;
+  font-weight: 700;
+}
+.game-tab:hover { color: var(--paper); }
+.game-tab.selected { border-color: var(--acid); color: var(--acid); }
+.game-view { display: grid; grid-template-columns: minmax(0, 1fr) 220px; min-height: 348px; }
+.game-view[hidden] { display: none; }
+.game-stage, .mines-stage { min-width: 0; background: #141914; overflow: hidden; }
+.crash-stage { position: relative; aspect-ratio: 1.9; align-self: center; }
+.crash-stage canvas, .plinko-stage canvas { display: block; width: 100%; height: 100%; }
+.crash-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  pointer-events: none;
+  text-align: center;
+}
+.crash-overlay span { color: var(--muted); font: 10px var(--mono); }
+.crash-overlay strong { color: var(--paper); font: 500 42px var(--mono); text-shadow: 0 0 24px #d1f36a44; }
+.crash-stage.running .crash-overlay strong { color: var(--acid); animation: multiplier-pulse .6s ease-in-out infinite alternate; }
+.crash-stage.busted .crash-overlay strong { color: var(--orange); animation: bust-shake .35s ease; }
+.plinko-stage { aspect-ratio: 1.72; align-self: center; }
+.game-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 18px;
+  border-left: 1px solid var(--line);
+  background: var(--panel);
+}
+.game-field { display: grid; gap: 7px; color: var(--muted); font: 10px var(--mono); text-transform: uppercase; }
+.game-field input, .game-field select {
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  outline: 0;
+  color: var(--paper);
+  background: var(--ink);
+  font: 13px var(--mono);
+}
+.game-field input:focus, .game-field select:focus { border-color: var(--acid); }
+.game-action {
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  color: var(--paper);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 700;
+  transition: transform .15s, border-color .15s, color .15s, background .15s;
+}
+.game-action:hover:not(:disabled) { transform: translateY(-1px); border-color: var(--acid); color: var(--acid); }
+.game-action.bright { border-color: var(--acid); color: var(--ink); background: var(--acid); }
+.game-action.bright:hover:not(:disabled) { color: var(--ink); background: #e0ff83; }
+.game-action:disabled { opacity: .4; cursor: not-allowed; }
+.game-message { min-height: 34px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.game-message.good { color: var(--mint); }
+.game-message.bad { color: var(--orange); }
+.mines-stage { display: grid; place-items: center; padding: 24px; }
+.mines-grid { display: grid; grid-template-columns: repeat(5, minmax(34px, 58px)); gap: 8px; width: max-content; max-width: 100%; }
+.mine-tile {
+  aspect-ratio: 1;
+  width: 100%;
+  border: 1px solid #3b483c;
+  border-radius: 3px;
+  color: #b7c1ae;
+  background: #222b22;
+  font: 13px var(--mono);
+  transition: transform .16s, background .16s, border-color .16s;
+}
+.mine-tile:hover:not(:disabled) { transform: translateY(-2px); border-color: var(--acid); background: #303b2d; }
+.mine-tile.safe { border-color: #86dbbb88; color: var(--mint); background: #86dbbb19; animation: tile-reveal .24s ease both; }
+.mine-tile.mine { border-color: #ff986b88; color: var(--orange); background: #ff986b22; animation: tile-reveal .24s ease both; }
+.mine-tile:disabled { cursor: default; }
+.round-history { padding: 14px 0 17px; border-top: 1px solid var(--line); }
+.round-history ol { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; padding: 0; list-style: none; }
+.round-history li { padding: 6px 9px; border: 1px solid var(--line); color: var(--muted); font: 10px var(--mono); }
+.round-history li.win { border-color: #86dbbb55; color: var(--mint); }
+.round-history li.loss { border-color: #ff986b55; color: var(--orange); }
+@keyframes multiplier-pulse { from { transform: scale(1); } to { transform: scale(1.035); } }
+@keyframes bust-shake { 20%, 60% { transform: translateX(-4px); } 40%, 80% { transform: translateX(4px); } }
+@keyframes tile-reveal { from { transform: scale(.82); } to { transform: scale(1); } }
+@media (max-width: 760px) {
+  .arcade-head { align-items: flex-start; }
+  .arcade-head h2 { font-size: 20px; }
+  .wallet-readout { flex-wrap: wrap; justify-content: flex-end; gap: 7px; max-width: 150px; }
+  .wallet-readout strong { min-width: 72px; font-size: 17px; }
+  .game-tab { flex: 1; min-width: 0; padding: 12px 8px; }
+  .game-view { grid-template-columns: 1fr; }
+  .crash-stage { min-height: 230px; aspect-ratio: 1.35; }
+  .crash-overlay strong { font-size: 34px; }
+  .plinko-stage { min-height: 290px; aspect-ratio: 1.05; }
+  .game-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 0; }
+  .game-message { align-self: center; }
+  .mines-stage { min-height: 310px; padding: 16px 8px; }
+  .mines-grid { gap: 6px; grid-template-columns: repeat(5, minmax(40px, 56px)); }
+}
+@media (max-width: 380px) {
+  .game-controls { grid-template-columns: 1fr; }
+  .mines-grid { gap: 4px; grid-template-columns: repeat(5, minmax(36px, 1fr)); width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .crash-stage.running .crash-overlay strong { animation: none; }
+  .mine-tile, .game-action, .game-tab { transition: none; }
+}

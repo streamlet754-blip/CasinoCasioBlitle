@@ -1,0 +1,4 @@
+.env
+node_modules/
+calculator_app/build/
+calculator_app/*.bin
